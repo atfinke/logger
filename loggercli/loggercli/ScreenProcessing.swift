@@ -18,7 +18,7 @@ class ScreenProcessing {
             .first else {
                 fatalError()
         }
-        return base.appendingPathComponent("logger")
+        return base.appendingPathComponent("loggercli").appendingPathComponent("screens")
     }()
     
     // MARK: - Initalization -
@@ -26,12 +26,13 @@ class ScreenProcessing {
     init() {
         try? FileManager.default.createDirectory(
             at: folderPath,
-            withIntermediateDirectories: false,
+            withIntermediateDirectories: true,
             attributes: nil)
         
-        Timer.scheduledTimer(withTimeInterval: Design.captureInterval, repeats: true) { _ in
-            self.capture()
-        }
+//        capture()
+//        Timer.scheduledTimer(withTimeInterval: Design.captureInterval, repeats: true) { _ in
+//            self.capture()
+//        }
     }
     
     private func capture() {
@@ -43,6 +44,7 @@ class ScreenProcessing {
             "-x",
             path.path
         ]
+        process.standardOutput = Pipe().fileHandleForWriting // don't fill console output
         process.launch()
         print(path)
     }

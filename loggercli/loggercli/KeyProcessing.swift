@@ -46,7 +46,7 @@ class KeyProcessing {
         let dKey: String
         switch key {
         case .character(let c):
-            dKey = "d: \(c)"
+            dKey = "\(c)"
             if isPressed && !processShortcut(character: c) {
                 if c == "." || c == "?" || c == "!" {
                     finishedWord()
@@ -224,7 +224,7 @@ class KeyProcessing {
     
     func stats() {
         let keys = topItems(key: KeyProcessing.keysKey).prefix(10)
-        let words = topItems(key: KeyProcessing.wordsKey).prefix(10)
+        let words = topItems(key: KeyProcessing.wordsKey).filter({ $0.0.count > 2 }).prefix(10)
         let commands = topItems(key: KeyProcessing.commandsKey).prefix(10)
         
         print("\nTop Keys:")

@@ -9,6 +9,6 @@
 import Foundation
 
 struct Design {
-    static let writeInterval = 120
+    static let writeInterval = 600
     static let captureInterval: TimeInterval = 60
 }

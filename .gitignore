@@ -90,4 +90,7 @@ fastlane/test_output
 iOSInjectionProject/
 
 .DS_Store
-screen/result.png
+python/result.png
+python/.vscode/
+
+.swiftpm/

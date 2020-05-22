@@ -4,7 +4,7 @@ import numpy as np
 from os import listdir
 from os.path import isfile, join
 
-screens_path = "/Users/andrewfinke/Library/Application Support/logger/"
+screens_path = "/Users/andrewfinke/Library/Application Support/loggercli/screens/"
 paths = [join(screens_path, f) for f in listdir(screens_path) if isfile(join(screens_path, f)) and ".png" in f]
 
 combined_image = None
