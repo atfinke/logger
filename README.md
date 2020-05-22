@@ -1,5 +1,5 @@
 # logger
-A personal keylogger. Tracks keys, commands, words, and screen (currently disabled). Writes to disk on interval specified in `Design.swift`. Python tool for creating composite image from screen captures in `python/*`.
+A personal keylogger. Tracks clicks, keys, commands, words, and screen (currently disabled). Writes to disk on interval specified in `Design.swift`. Python tool for creating composite image from screen captures in `python/*`.
 
 ## Setup
 
@@ -10,5 +10,5 @@ A personal keylogger. Tracks keys, commands, words, and screen (currently disabl
 
 ## Usage
 
-Runs as an agent app (invisible). On launch, will print top keys, commands, and words. Visible in `Console.app` by filtering for the `com.andrewfinke.logger` subsystem.
+Runs as an agent app (invisible). On launch, will print total clicks and top keys, commands, and words. Visible in `Console.app` by filtering for the `com.andrewfinke.logger` subsystem.
 
