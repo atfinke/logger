@@ -56,70 +56,71 @@ class Logger {
         IOHIDManagerSetDeviceMatchingMultiple(manager, matchingMultiple)
         guard let devices = IOHIDManagerCopyDevices(manager) else { fatalError() }
         
-        for deviceElement in devices as NSSet {
-            guard CFGetTypeID(deviceElement as CFTypeRef) == IOHIDDeviceGetTypeID() else { fatalError() }
-            let device = deviceElement as! IOHIDDevice
-            
-            let isMouse: Bool
-            let filters: CFDictionary
-            
-            if device.conforms(toPage: kHIDPage_GenericDesktop, usage: kHIDUsage_GD_Keyboard) ||
-                device.conforms(toPage: kHIDPage_GenericDesktop, usage: kHIDUsage_GD_Keypad) {
-                isMouse = false
-                filters = [
-                    kIOHIDElementUsageMinKey: 4,
-                    kIOHIDElementUsageMaxKey: 231
-                    ] as CFDictionary
-            } else if device.conforms(toPage: kHIDPage_GenericDesktop, usage: kHIDUsage_GD_Mouse) {
-                isMouse = true
-                filters = [
-                    kIOHIDElementUsageMinKey: 1,
-                    kIOHIDElementUsageMaxKey: 1
-                    ] as CFDictionary
-            } else {
-                fatalError()
-            }
-            IOHIDDeviceSetInputValueMatching(device, filters)
-            
-            if isMouse {
-                IOHIDDeviceRegisterInputValueCallback(device, { context, result, sender, value in
-                    Logger.current.mouseInputValueCallback(
-                        context: context,
-                        result: result,
-                        sender: sender,
-                        value: value)
-                    
-                }, nil)
-            } else {
-                IOHIDDeviceRegisterInputValueCallback(device, { context, result, sender, value in
-                    Logger.current.keyboardInputValueCallback(
-                        context: context,
-                        result: result,
-                        sender: sender,
-                        value: value)
-                    
-                }, nil)
-            }
-        }
-        
-        IOHIDManagerRegisterDeviceMatchingCallback( manager, { context, result, sender, device in
-            Logger.current.deviceMatchingCallback(
-                context: context,
-                result: result,
-                sender: sender,
-                device: device)
-        }, nil)
-        IOHIDManagerRegisterDeviceRemovalCallback(manager, { context, result, sender, device in
-            Logger.current.deviceRemovalCallback(
-                context: context,
-                result: result,
-                sender: sender,
-                device: device)
-        }, nil)
+//        for deviceElement in devices as NSSet {
+//            guard CFGetTypeID(deviceElement as CFTypeRef) == IOHIDDeviceGetTypeID() else { fatalError() }
+//            let device = deviceElement as! IOHIDDevice
+//
+//            let isMouse: Bool
+//            let filters: CFDictionary
+//
+//            if device.conforms(toPage: kHIDPage_GenericDesktop, usage: kHIDUsage_GD_Keyboard) ||
+//                device.conforms(toPage: kHIDPage_GenericDesktop, usage: kHIDUsage_GD_Keypad) {
+//                isMouse = false
+//                filters = [
+//                    kIOHIDElementUsageMinKey: 4,
+//                    kIOHIDElementUsageMaxKey: 231
+//                    ] as CFDictionary
+//            } else if device.conforms(toPage: kHIDPage_GenericDesktop, usage: kHIDUsage_GD_Mouse) {
+//                isMouse = true
+//                filters = [
+//                    kIOHIDElementUsageMinKey: 1,
+//                    kIOHIDElementUsageMaxKey: 1
+//                    ] as CFDictionary
+//            } else {
+//                fatalError("Unknown device: \(device)")
+//            }
+//            IOHIDDeviceSetInputValueMatching(device, filters)
+//
+//            if isMouse {
+//                IOHIDDeviceRegisterInputValueCallback(device, { context, result, sender, value in
+//                    Logger.current.mouseInputValueCallback(
+//                        context: context,
+//                        result: result,
+//                        sender: sender,
+//                        value: value)
+//
+//                }, nil)
+//            } else {
+//                IOHIDDeviceRegisterInputValueCallback(device, { context, result, sender, value in
+//                    Logger.current.keyboardInputValueCallback(
+//                        context: context,
+//                        result: result,
+//                        sender: sender,
+//                        value: value)
+//
+//                }, nil)
+//            }
+//        }
+//
+//        IOHIDManagerRegisterDeviceMatchingCallback( manager, { context, result, sender, device in
+//            Logger.current.deviceMatchingCallback(
+//                context: context,
+//                result: result,
+//                sender: sender,
+//                device: device)
+//        }, nil)
+//        IOHIDManagerRegisterDeviceRemovalCallback(manager, { context, result, sender, device in
+//            Logger.current.deviceRemovalCallback(
+//                context: context,
+//                result: result,
+//                sender: sender,
+//                device: device)
+//        }, nil)
         
         IOHIDManagerScheduleWithRunLoop(manager, CFRunLoopGetCurrent(), CFRunLoopMode.defaultMode.rawValue)
         let ret = IOHIDManagerOpen(manager, 0);
         guard ret == kIOReturnSuccess else {
+
             fatalError("ret: \(ret)")
         }
         
