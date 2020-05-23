@@ -13,6 +13,12 @@ class KeyProcessing {
     
     // MARK: - Properties -
     
+    private static let trimLetters: CharacterSet = {
+        var set = CharacterSet.letters
+        set.invert()
+        return set
+    }()
+    
     private static let keysKey = "KeyProcessingKeys"
     private static let wordsKey = "KeyProcessingWords"
     private static let commandsKey = "KeyProcessingCommands"
@@ -157,7 +163,13 @@ class KeyProcessing {
     }
     
     private func finishedWord() {
-        let word = String(activeWord).lowercased()
+        guard !activeWord.isEmpty else { return }
+        
+        let word = String(activeWord)
+            .lowercased()
+            .trimmingCharacters(in: KeyProcessing.trimLetters)
+        guard !word.isEmpty else { return }
+        
         wordsToWrite[word, default: 0] += 1
         activeWord.removeAll()
         os_log("%{public}s: %{public}i", log: log, type: .info, word, wordsToWrite[word, default: 0])
