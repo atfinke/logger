@@ -48,7 +48,7 @@ class KeyProcessing {
         switch key {
         case .character(let c):
             dKey = "\(c)"
-            if isPressed && !processShortcut(character: c) {
+            if isPressed && !processShortcut(character: c, code: code) {
                 if c == "." || c == "?" || c == "!" {
                     finishedWord()
                 } else {
@@ -165,7 +165,7 @@ class KeyProcessing {
     
     // MARK: - Shortcut Processing -
     
-    private func processShortcut(character: Character) -> Bool {
+    private func processShortcut(character: Character, code: UInt32) -> Bool {
         let isControl = modifierKeyStates.contains(.leftControl) || modifierKeyStates.contains(.rightControl)
         let isOption = modifierKeyStates.contains(.leftOption) || modifierKeyStates.contains(.rightOption)
         let isShift = modifierKeyStates.contains(.leftShift) || modifierKeyStates.contains(.rightShift)
@@ -188,7 +188,18 @@ class KeyProcessing {
         if isCommand {
             key += "⌘"
         }
-        key += character.uppercased()
+        
+        switch shiftState {
+        case .none, .caps:
+            key += character.uppercased()
+        case .shift:
+            // Convert ⇧⌘! to ⇧⌘1
+            guard let actualKey = keyboardMap.key(for: code, shiftState: .none), case .character(let c) = actualKey else {
+                fatalError("Bad code: \(code.description)")
+            }
+            key += c.uppercased()
+        }
+
         commandsToWrite[key, default: 0] += 1
         os_log("%{public}s: %{public}i", log: log, type: .info, key, commandsToWrite[key, default: 0])
         return false
