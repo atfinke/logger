@@ -12,6 +12,7 @@ import os.log
 let log = OSLog(subsystem: "com.andrewfinke.logger", category: "general")
 os_log("Starting", log: log, type: .info)
 
+let defaults = UserDefaults.standard
 let _ = Logger.current
 RunLoop.main.run()
 

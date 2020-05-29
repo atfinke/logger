@@ -235,11 +235,11 @@ class KeyProcessing {
     }
     
     private func write(data: [String: Int], to defaultsKey: String) {
-        var disk = UserDefaults.standard.value(forKey: defaultsKey) as? [String: Int] ?? [:]
+        var disk = defaults.value(forKey: defaultsKey) as? [String: Int] ?? [:]
         for (key, value) in data {
             disk[key, default: 0] += value
         }
-        UserDefaults.standard.set(disk, forKey: defaultsKey)
+        defaults.set(disk, forKey: defaultsKey)
     }
     
     // MARK: - Stats -
@@ -266,7 +266,7 @@ class KeyProcessing {
     }
     
     private func topItems(key: String) -> [(String, Int)] {
-        let disk = UserDefaults.standard.value(forKey: key) as? [String: Int] ?? [:]
+        let disk = defaults.value(forKey: key) as? [String: Int] ?? [:]
         return disk.sorted(by: { $0.value > $1.value })
     }
     

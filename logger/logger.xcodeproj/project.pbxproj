@@ -25,7 +25,7 @@
 		1455969D247833EC00DCC33C /* ClickProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickProcessing.swift; sourceTree = "<group>"; };
 		1455969E247833EC00DCC33C /* Design.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
 		1455969F247833EC00DCC33C /* KeyProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyProcessing.swift; sourceTree = "<group>"; };
-		145596A0247833EC00DCC33C /* HIDKeyboardMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HIDKeyboardMap.swift; sourceTree = "<group>"; };
+		145596A0247833EC00DCC33C /* HIDKeyboardMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HIDKeyboardMap.swift; path = ../loggerstats/HIDKeyboardMap.swift; sourceTree = "<group>"; };
 		145596A1247833EC00DCC33C /* ScreenProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenProcessing.swift; sourceTree = "<group>"; };
 		145596A2247833EC00DCC33C /* IOKit+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IOKit+Extensions.swift"; sourceTree = "<group>"; };
 		145596AB2478365C00DCC33C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };

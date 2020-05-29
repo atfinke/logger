@@ -28,8 +28,8 @@ class ClickProcessing {
         guard clicksToWrite > 0 else {
             return
         }
-        let clicks = UserDefaults.standard.integer(forKey: ClickProcessing.key)
-        UserDefaults.standard.set(clicks + clicksToWrite, forKey: ClickProcessing.key)
+        let clicks = defaults.integer(forKey: ClickProcessing.key)
+        defaults.set(clicks + clicksToWrite, forKey: ClickProcessing.key)
         clicksToWrite = 0
     }
     
@@ -40,6 +40,6 @@ class ClickProcessing {
             "Total Clicks: %{public}i",
             log: log,
             type: .info,
-            UserDefaults.standard.integer(forKey: ClickProcessing.key))
+            defaults.integer(forKey: ClickProcessing.key))
     }
 }
